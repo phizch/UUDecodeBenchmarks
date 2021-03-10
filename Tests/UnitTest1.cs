@@ -303,5 +303,48 @@ namespace Tests
 		}
 
 
+
+		[Fact]
+		public unsafe void Decode32Bytes_v2()
+		{
+			var dest = GetDest();
+
+			fixed ( byte* pData = &Data[0] )
+			fixed ( byte* pDest = &dest[0] )
+			{
+				UUEncoding.Vec256.Decode32Bytes_v2( pData, pDest );
+				AssertCorrect( dest, 32 );
+			}
+		}
+
+
+
+		[Fact]
+		public unsafe void Decode32Bytes_v2_Permute()
+		{
+			var dest = GetDest();
+
+			fixed ( byte* pData = &Data[0] )
+			fixed ( byte* pDest = &dest[0] )
+			{
+				UUEncoding.Vec256.Decode32Bytes_v2_Permute( pData, pDest );
+				AssertCorrect( dest, 32 );
+			}
+		}
+
+
+
+		[Fact]
+		public unsafe void Decode32Bytes_v2_temp_upper()
+		{
+			var dest = GetDest();
+
+			fixed ( byte* pData = &Data[0] )
+			fixed ( byte* pDest = &dest[0] )
+			{
+				UUEncoding.Vec256.Decode32Bytes_v2_temp_upper( pData, pDest );
+				AssertCorrect( dest, 32 );
+			}
+		}
 	}
 }

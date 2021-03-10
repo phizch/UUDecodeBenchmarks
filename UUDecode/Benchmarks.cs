@@ -531,5 +531,38 @@ namespace UUDecode
 
 
 
+		[Benchmark]
+		public unsafe int Decode32Bytes_v2_Permute()
+		{
+			fixed ( byte* pData = &Data[0] )
+			fixed ( byte* pDest = &Dest[0] )
+			{
+				var res = 0;
+				for ( int i = 0; i < Count/2; i++ )
+				{
+					UUEncoding.Vec256.Decode32Bytes_v2_Permute( pData, pDest );
+					res += pDest[0];
+				}
+				return res;
+			}
+		}
+
+
+
+		[Benchmark]
+		public unsafe int Decode32Bytes_v2_temp_upper()
+		{
+			fixed ( byte* pData = &Data[0] )
+			fixed ( byte* pDest = &Dest[0] )
+			{
+				var res = 0;
+				for ( int i = 0; i < Count/2; i++ )
+				{
+					UUEncoding.Vec256.Decode32Bytes_v2_temp_upper( pData, pDest );
+					res += pDest[0];
+				}
+				return res;
+			}
+		}
 	}
 }
