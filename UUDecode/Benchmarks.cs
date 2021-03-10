@@ -1,4 +1,6 @@
-﻿using BenchmarkDotNet.Attributes;
+﻿#define SCALARS
+#define VEC_128
+using BenchmarkDotNet.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +30,7 @@ namespace UUDecode
 
 		public int Count { get; set; } = 10_000;
 
+#if SCALARS
 
 		#region Scalar
 
@@ -232,7 +235,9 @@ namespace UUDecode
 
 		#endregion Scalar
 
+#endif
 
+#if VEC_128
 
 		[Benchmark]
 		public int Decode16Bytes()
@@ -435,7 +440,7 @@ namespace UUDecode
 			}
 		}
 
-
+#endif
 
 		[Benchmark]
 		public unsafe int Decode32Bytes()
